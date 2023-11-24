@@ -1,115 +1,147 @@
 package StepDefination;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
+import com.beust.jcommander.internal.Sets;
+
+import OrangeHRM_Webages.AddEmployeePage;
+import OrangeHRM_Webages.EmpPersonalDetail_Page;
+import OrangeHRM_Webages.HomePage;
+import OrangeHRM_Webages.LoginPage;
+import OrangeHRM_Webages.PIM_HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import utilities.SeleniumUtility;
-import OrangeHRM_WebPages.AddEmployeePage;
-import OrangeHRM_WebPages.EmployeePersonalDetailsPage;
-import OrangeHRM_WebPages.HomePage;
-import OrangeHRM_WebPages.LoginPage;
-import OrangeHRM_WebPages.PIMhomePage;
 
-
-public class OrangeHRM extends SeleniumUtility{
+public class OrangeHRm extends SeleniumUtility {
+	
 	WebDriver driver;
 	LoginPage getLoginPage;
 	HomePage getHomePage;
-	PIMhomePage getPIMhomePage;
+	PIM_HomePage getPIM_HomePage;
 	AddEmployeePage getAddEmployeePage;
-	EmployeePersonalDetailsPage getEmployeePersonalDetailsPage;
+	EmpPersonalDetail_Page getEmpPersonalDetail_Page;
 	
-	
-	@Given("user is already loggen in")
-	public void user_is_already_loggen_in() {
-	    driver = setUp("chrome", "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+	@Given("User is already login with valid credentials")
+	public void user_is_already_login_with_valid_credentials() {
+	    driver = setUp("chrome", "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
 	    
 	    getLoginPage = new LoginPage(driver);
 	    getHomePage = new HomePage(driver);
-	    getPIMhomePage = new PIMhomePage(driver);
+	    getPIM_HomePage = new PIM_HomePage(driver);
 	    getAddEmployeePage = new AddEmployeePage(driver);
-	    getEmployeePersonalDetailsPage = new EmployeePersonalDetailsPage(driver);
+	    getEmpPersonalDetail_Page = new EmpPersonalDetail_Page(driver);
 	    
-	    getLoginPage.UserName("Admin");
-	    getLoginPage.Password("admin123");
-	    getLoginPage.LoginButton();
-	    
+	    getLoginPage.LogIntoApplication("Admin", "admin123");
 	}
 
-	@When("user click on PIM link")
-	public void user_click_on_pim_link() {
-	   getHomePage.PIMLink();
-	}
-
-	@When("click on the AddEmployee button")
-	public void click_on_the_add_employee_button() {
-	    getPIMhomePage.AddEmployeeButton();
-	}
-
-	@When("FirstName {string} and LastName {string}")
-	public void first_name_and_last_name(String string, String string2) {
-	    getAddEmployeePage.AddEmployeePage("Rohit", "Sharma");
-	}
-
-	@When("EmployeeId {string}")
-	public void employee_id(String string) {
-	    getAddEmployeePage.AddEmpID("4545");
-	}
-
-	@Then("Click on save button")
-	public void click_on_save_button_() {
-		setSleepTime(2000);
-	   getAddEmployeePage.SaveButton();
-	}
-
-	@Then("click on PIM link")
-	public void click_on_pim_link() {
-	    getHomePage.PIMLink();
-	}
-
-	@When("User Search FirstName {string} and EmployeeId {string}")
-	public void user_search_first_name_and_employee_id(String string, String string2) {
-	   getPIMhomePage = new PIMhomePage(driver);
-	   getPIMhomePage.SearchEmployee("Rohit", "4545");
-	}
-
-	@When("click on the search button")
-	public void click_on_the_search_button() {
-	    getPIMhomePage.SearchButton();
-	}
-
-	@When("click on required Searched EmployeeId")
-	public void click_on_required_searched_employee_id() {
-	    getPIMhomePage.EditPIM();
-	}
-
-	@Then("Add Liscence Number {string}")
-	public void add_liscence_number(String string) {
-	   getEmployeePersonalDetailsPage.EditDetails("3285");
-	}
-
-	@Then("click on save button")
-	public void click_on_save_button() {
-	   getEmployeePersonalDetailsPage.saveButton();
-	}
-
-	@Then("click on the PIM link")
+	@Given("click on the PIM Link")
 	public void click_on_the_pim_link() {
-	    getHomePage.PIMLink();
+	    getHomePage.ClickPIM();
 	}
 
-	@Then("Select EmployeeId and click on the Delete icon")
-	public void select_employee_id_and_click_on_the_delete_icon() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("user click on the addButton")
+	public void user_click_on_the_add_button() {
+	    getPIM_HomePage.AddEmpBtn();
 	}
 
-	@Then("click on the DeleteConfirmation button")
-	public void click_on_the_delete_confirmation_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("enter firstName,lastName and empId and click on save button")
+	public void enter_first_name_last_name_and_emp_id_and_click_on_save_button() {
+	    getAddEmployeePage.CreateEmp("Rohit", "Sharma", "2640");
+	    getAddEmployeePage.EmpID_saveBtn();
+	    getHomePage.ClickPIM();
 	}
 
+	@When("Search created EmpId in EmpIdField")
+	public void search_created_emp_id_in_emp_id_field() {
+	   getPIM_HomePage.SearchEmpId("2640");
+	   getPIM_HomePage.SearchButton();
+	}
+
+	@Then("user able to search create EmployeeId")
+	public void user_able_to_search_create_employee_id() {
+		setSleepTime(2000);
+	    String ActualMsg = getPIM_HomePage.getSearchResultMsg();
+	    String ExpectedMsg = "(1) Record Found";
+	    Assert.assertEquals(ActualMsg, ExpectedMsg);
+	}
+
+	@Then("close the browser")
+	public void close_the_browser() {
+	    getHomePage.CloseBrowser();
+	}
+
+	@When("user enter created EmpId in EmpId field")
+	public void user_enter_created_emp_id_in_emp_id_field() {
+	    getPIM_HomePage.SearchEmpId("2640");
+	}
+
+	@When("click on search button")
+	public void click_on_search_button() {
+		getPIM_HomePage.SearchButton();
+	}
+
+	@When("click on the FirstCheckBox of created EmpId")
+	public void click_on_the_first_check_box_of_created_emp_id() {
+	    getPIM_HomePage.checkBox();
+	}
+
+	@When("click on the EditIcon")
+	public void click_on_the_edit_icon() {
+		getPIM_HomePage.EditClick();
+	}
+
+	@When("enter MiddleName in MiddleNameField and click on save button")
+	public void enter_middle_name_in_middle_name_field_and_click_on_save_button() {
+		setSleepTime(2000);
+	    getEmpPersonalDetail_Page.UpdateMiddleName("Gurunath");
+	    getHomePage.ClickPIM();
+	}
+
+	@When("search Updated EmpId in EmpId Field")
+	public void search_updated_emp_id_in_emp_id_field() {
+	   getPIM_HomePage.SearchEmpId("2640");
+	   getPIM_HomePage.SearchButton();
+	}
+
+	@Then("verify MiddleName is Updated")
+	public void verify_middle_name_is_updated() {
+		setSleepTime(2000);
+	    String ActMidName = getPIM_HomePage.UpdatedMiddleNameText();
+	    String ExpMidName = "Rohit Gurunath";
+	    Assert.assertEquals(ActMidName, ExpMidName);
+	    
+	}
+
+	@When("user search created EmpId In EmpId Field")
+	public void user_search_created_emp_id_in_emp_id_field() {
+	    getPIM_HomePage.SearchEmpId("2640");
+	    setSleepTime(1000);
+	    getPIM_HomePage.SearchButton();
+	}
+
+	@When("click on the firstcheckBox")
+	public void click_on_the_firstcheck_box() {
+	    getPIM_HomePage.getFirstEmpCheckBox();
+	}
+
+	@When("click on the Delete and click on yes button on Delete Popup")
+	public void click_on_the_delete_and_click_on_yes_button_on_delete_popup() {
+	    getPIM_HomePage.DeleteCreateEmp();
+	}
+
+	@When("search EmpId In EmpId Field")
+	public void search_emp_id_in_emp_id_field() {
+	    getPIM_HomePage.SearchEmpId("2640");
+	    getPIM_HomePage.SearchButton();
+	}
+
+	@Then("user should not be able to search delete EmpId")
+	public void user_should_not_be_able_to_search_delete_emp_id() {
+	    String ActMsg = getPIM_HomePage.getSearchResultMsg();
+	    String ExpMsg = "No Records Found";
+	    Assert.assertEquals(ActMsg, ExpMsg);
+	}
 }

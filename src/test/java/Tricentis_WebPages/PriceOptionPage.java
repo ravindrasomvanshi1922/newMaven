@@ -8,30 +8,32 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.SeleniumUtility;
 
 public class PriceOptionPage extends SeleniumUtility{
-	public  PriceOptionPage(WebDriver driver) {
+	public PriceOptionPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath="//tfoot[tr[th[label[input[@id\"selectsilver\"]]]]]")
-	private WebElement PriceOption;
+	@FindBy(xpath="//*[@id=\"priceTable\"]/tfoot/tr/th[2]/label[1]/span")
+	private WebElement priceOption;
 	
-	@FindBy(id="nextsendquote")
-	private WebElement NextButton;
+	@FindBy(xpath="//button[@id=\"nextsendquote\"]")
+	private WebElement nextBtn;
 
 	public WebElement getPriceOption() {
-		return PriceOption;
+		return priceOption;
 	}
 
-	public WebElement getNextButton() {
-		return NextButton;
+	public WebElement getNextBtn() {
+		return nextBtn;
 	}
 	
-	public void PriceOption() {
-		clickOnElement(PriceOption);
+//********************************************************************
+	
+	public void PriceOptionSelect() {
+		clickOnElement(priceOption);
 	}
 	
-	public void NextButton() {
-		clickOnElement(NextButton);
+	public void PriceOptionPage_NextBtn() {
+		clickOnElement(nextBtn);
 	}
 
 }

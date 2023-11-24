@@ -14,120 +14,123 @@ public class ProductDataPage extends SeleniumUtility{
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(id="startdate")
-	private WebElement StartDateField;
+	@FindBy(xpath="//input[@id=\"startdate\"]")
+	private WebElement StartDate;
 	
-	@FindBy(id="insurancesum")
-	private WebElement InsuranceSumField;
+	@FindBy(xpath="//table[@class=\"ui-datepicker-calendar\"]/tbody/tr[4]/td[5]/a")
+	private WebElement StartDatePicker;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[3]/div[2]/select/option")
-	private List<WebElement> InsuranceSumOpt;
+	@FindBy(xpath="//select[@id=\"insurancesum\"]")
+	private WebElement insuranceSum;
 	
-	@FindBy(id="meritrating")
-	private WebElement MeritratingField;
+	@FindBy(xpath="//select[@id=\"insurancesum\"]/option")
+	private List<WebElement> insuranceSumOpt;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[3]/div[3]/select/option")
-	private List<WebElement> MeritratingOpt;
+	@FindBy(xpath="//select[@id=\"meritrating\"]")
+	private WebElement meritRating;
 	
-	@FindBy(id="damageinsurance")
-	private WebElement DamageInsuranceField;
+	@FindBy(xpath="//select[@id=\"meritrating\"]/option")
+	private List<WebElement> meritRatingOpt;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[3]/div[4]/select/option")
-	private List<WebElement> DamageinsuranceOpt;
+	@FindBy(xpath="//select[@id=\"damageinsurance\"]")
+	private WebElement damageInsurance;
 	
-	@FindBy(xpath="//div[p[label[input[@id=\"EuroProtection\"]]]]")
-	private WebElement OptionalProduct;
+	@FindBy(xpath="//select[@id=\"damageinsurance\"]/option")
+	private List<WebElement> damageInsuranceOpt;
 	
-	@FindBy(id="courtesycar")
-	private WebElement CourtesyCarField;
+	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[3]/div[5]/p/label/span")
+	private List<WebElement> optionalProducts;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[3]/div[6]/select/option")
-	private List<WebElement> CourtesyCarOpt;
+	@FindBy(xpath="//select[@id=\"courtesycar\"]")
+	private WebElement courtesyCar;
 	
-	@FindBy(id="nextselectpriceoption")
-	private WebElement NextButton;
+	@FindBy(xpath="//select[@id=\"courtesycar\"]/option")
+	private List<WebElement> courtesyCarOpt;
 	
-//_____________________________________________________________________________________________
-//_____________________________________________________________________________________________
+	@FindBy(xpath="// button[@id=\"nextselectpriceoption\"]")
+	private WebElement nextBtn;
 
 	public WebElement getStartDate() {
-		return StartDateField;
+		return StartDate;
 	}
 
-	public WebElement getInsuranceSumField() {
-		return InsuranceSumField;
+	public WebElement getDatePicker() {
+		return StartDatePicker;
+	}
+
+	public WebElement getInsuranceSum() {
+		return insuranceSum;
 	}
 
 	public List<WebElement> getInsuranceSumOpt() {
-		return InsuranceSumOpt;
+		return insuranceSumOpt;
 	}
 
-	public WebElement getMeritratingField() {
-		return MeritratingField;
+	public WebElement getMeritRating() {
+		return meritRating;
 	}
 
-	public List<WebElement> getMeritratingOpt() {
-		return MeritratingOpt;
+	public List<WebElement> getMeritRatingOpt() {
+		return meritRatingOpt;
 	}
 
-	public WebElement getDamageInsuranceField() {
-		return DamageInsuranceField;
+	public WebElement getDamageInsurance() {
+		return damageInsurance;
 	}
 
-	public List<WebElement> getDamageinsuranceOpt() {
-		return DamageinsuranceOpt;
+	public List<WebElement> getDamageInsuranceOpt() {
+		return damageInsuranceOpt;
 	}
 
-	public WebElement getOptionalProduct() {
-		return OptionalProduct;
+	public List<WebElement> getOptionalProducts() {
+		return optionalProducts;
 	}
 
-	public WebElement getCourtesyCarFied() {
-		return CourtesyCarField;
+	public WebElement getCourtesyCar() {
+		return courtesyCar;
 	}
 
 	public List<WebElement> getCourtesyCarOpt() {
-		return CourtesyCarOpt;
+		return courtesyCarOpt;
 	}
 
-	public WebElement getNextButton() {
-		return NextButton;
+	public WebElement getNextBtn() {
+		return nextBtn;
+	}
+
+//******************************************************************************
+	
+	public void StartDateSelect(String startDate) {
+		clickOnElement(StartDate);
+		typeInput(StartDate, startDate);
 	}
 	
-//____________________________________________________________________________________________
-//____________________________________________________________________________________________
-	
-	public void StartDateField(String StartDate) {
-		clickOnElement(StartDateField);
+	public void InsuranceSum() {
+		clickOnElement(insuranceSum);
+		clickOnElement(insuranceSumOpt.get(4));
 	}
 	
-	public void InsuranceSumField() {
-		clickOnElement(InsuranceSumField);
-		clickOnElement(InsuranceSumOpt.get(2));
+	public void MeritRating() {
+		clickOnElement(meritRating);
+		clickOnElement(meritRatingOpt.get(1));
 	}
 	
-	public void MeritratingField() {
-		clickOnElement(MeritratingField);
-		clickOnElement(MeritratingOpt.get(2));
-	}
-	
-	public void DamageInsuranceField() {
-		clickOnElement(DamageInsuranceField);
-		clickOnElement(DamageinsuranceOpt.get(2));
+	public void DamageInsurance() {
+		clickOnElement(damageInsurance);
+		clickOnElement(damageInsuranceOpt.get(2));
 	}
 	
 	public void OptionalProduct() {
-		clickOnElement(OptionalProduct);
+		clickOnElement(optionalProducts.get(1));
 	}
 	
-	public void CourtesyCarFied() {
-		clickOnElement(CourtesyCarField);
-		clickOnElement(CourtesyCarOpt.get(2));
+	public void CourtesyCar() {
+		clickOnElement(courtesyCar);
+		clickOnElement(courtesyCarOpt.get(1));
 	}
 	
-	public void NextButton() {
-		clickOnElement(NextButton);
+	public void ProductDataPage_NextBtn() {
+		clickOnElement(nextBtn);
 	}
 	
-
 }

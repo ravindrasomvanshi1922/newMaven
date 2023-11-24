@@ -2,7 +2,6 @@ package Tricentis_WebPages;
 
 import java.util.List;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,215 +10,146 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.SeleniumUtility;
 
 public class VehicleDataPage extends SeleniumUtility{
-	
-
-	public  VehicleDataPage(WebDriver driver) {
+	public VehicleDataPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(id="make")
-	private WebElement MakeField;
+	@FindBy(xpath="//div[@class=\"main-navigation\"]/ul/li[1]/a")
+	private WebElement autoMobileIcon;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[1]/div[1]/select/option")
-	private List<WebElement> MakeOpt;
+	@FindBy(xpath="//select[@id=\"make\"]")
+	private WebElement makeField;
 	
-	@FindBy(id="model")
-	private WebElement ModelField;
+	@FindBy(xpath="//select[@id=\"make\"]/option")
+	private List<WebElement> makeOpt;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[1]/div[2]/select/option")
-	private List<WebElement> ModelOpt;
+	@FindBy(xpath="//input[@id=\"engineperformance\"]")
+	private WebElement enginePerformanceField;
 	
-	@FindBy(id="cylindercapacity")
-	private WebElement CylinderCapacityField;
+	@FindBy(xpath="//button[@id=\"opendateofmanufacturecalender\"]")
+	private WebElement dateOfManuFacture;
 	
-	@FindBy(id="engineperformance")
-	private WebElement EnginePerformanceField;
+	@FindBy(xpath="//table[@class=\"ui-datepicker-calendar\"]/tbody/tr[4]/td[4]/a")
+	private WebElement dateselect;
 	
-	@FindBy(id="opendateofmanufacturecalender")
-	private WebElement DateOfManufactureIcon;
+	@FindBy(xpath="//select[@id=\"numberofseats\"]")
+	private WebElement numOfSeats;
 	
-	@FindBy(xpath="//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[1]/td[4]/a")
-	private WebElement DatePicker;
+	@FindBy(xpath="//select[@id=\"numberofseats\"]/option")
+	private List<WebElement> numOfSeatsOpt;
 	
-	@FindBy(id="numberofseats")
-	private WebElement NumOfSeat;
+	@FindBy(xpath="//select[@id=\"fuel\"]")
+	private WebElement fuelField;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[1]/div[6]/select/option")
-	private List<WebElement> NumOfSeatOpt;
+	@FindBy(xpath="//select[@id=\"fuel\"]/option")
+	private List<WebElement> fuelOpt;
 	
-	@FindBy(id="numberofseatsmotorcycle")
-	private WebElement NumOfSeatsMotorCycle1;
+	@FindBy(xpath="//input[@id=\"listprice\"]")
+	private WebElement listPrice;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[1]/div[8]/select/option")
-	private List<WebElement> NumOfSeatsMotorCycleOpt;
+	@FindBy(xpath="//input[@id=\"annualmileage\"]")
+	private WebElement annualMileage;
 	
-	@FindBy(id="fuel")
-	private WebElement FuelFiled;
+	@FindBy(xpath="//button[@id=\"nextenterinsurantdata\"]")
+	private WebElement nextBtn;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[1]/div[9]/select/option")
-	private List<WebElement> FuelFiledOpt;
+//**********************************************************************************************8
 	
-	@FindBy(id="payload")
-	private WebElement PayloadField;
-	
-	@FindBy(id="totalweight")
-	private WebElement TotalWeightField;
-	
-	@FindBy(id="listprice")
-	private WebElement ListpriceFiled;
-	
-	@FindBy(id="annualmileage")
-	private WebElement AnnualMileageFiled;
-	
-	@FindBy(id="nextenterinsurantdata")
-	private WebElement NextButton;
+	public WebElement getAutoMobileIcon() {
+		return autoMobileIcon;
+	}
 
-//________________________________________________________________________________________________
-//________________________________________________________________________________________________
-	
 	public WebElement getMakeField() {
-		return MakeField;
+		return makeField;
 	}
 
 	public List<WebElement> getMakeOpt() {
-		return MakeOpt;
-	}
-
-	public WebElement getModelField() {
-		return ModelField;
-	}
-
-	public List<WebElement> getModelOpt() {
-		return ModelOpt;
-	}
-
-	public WebElement getCylinderCapacityField() {
-		return CylinderCapacityField;
+		return makeOpt;
 	}
 
 	public WebElement getEnginePerformanceField() {
-		return EnginePerformanceField;
+		return enginePerformanceField;
 	}
 
-	public WebElement getDateOfManufactureIcon() {
-		return DateOfManufactureIcon;
+	public WebElement getDateOfManuFacture() {
+		return dateOfManuFacture;
 	}
 	
-	public WebElement DatePicker() {
-		return DatePicker;
+	public WebElement getDateselect() {
+		return dateselect;
 	}
 
-	public WebElement getNumOfSeat() {
-		return NumOfSeat;
+	public WebElement getNumOfSeats() {
+		return numOfSeats;
 	}
 
-	public List<WebElement> getNumOfSeatOt() {
-		return NumOfSeatOpt;
+	public List<WebElement> getNumOfSeatsOpt() {
+		return numOfSeatsOpt;
 	}
 
-	public WebElement getNumOfSeatsMotorCycle1() {
-		return NumOfSeatsMotorCycle1;
+	public WebElement getFuelField() {
+		return fuelField;
 	}
 
-	public List<WebElement> getNumOfSeatsMotorCycleOPt() {
-		return NumOfSeatsMotorCycleOpt;
+	public List<WebElement> getFuelOpt() {
+		return fuelOpt;
 	}
 
-	public WebElement getFuelFiled() {
-		return FuelFiled;
+	public WebElement getListPrice() {
+		return listPrice;
 	}
 
-	public List<WebElement> getFuelFiledOpt() {
-		return FuelFiledOpt;
+	public WebElement getAnnualMileage() {
+		return annualMileage;
 	}
 
-	public WebElement getPayloadField() {
-		return PayloadField;
-	}
-
-	public WebElement getTotalWeightField() {
-		return TotalWeightField;
-	}
-
-	public WebElement getListpriceFiled() {
-		return ListpriceFiled;
-	}
-
-	public WebElement getAnnualMileageFiled() {
-		return AnnualMileageFiled;
-	}
-
-	public WebElement getNextButton() {
-		return NextButton;
-	}
-
-//_______________________________________________________________________________
-//_______________________________________________________________________________
-		
-	public void MakeFieldData() {
-		clickOnElement(MakeField);
-		clickOnElement(MakeOpt.get(2));
+	public WebElement getNextBtn() {
+		return nextBtn;
 	}
 	
-	public void ModelFieldData() {
-		clickOnElement(ModelField);
-		clickOnElement(ModelOpt.get(1));
+// ******************************************************************************************
+	
+	public void ClickAutomobile() {
+		clickOnElement(autoMobileIcon);
 	}
 	
-	public void CylinderCapacityField(String CylinderCapacity ) {
-		clickOnElement(CylinderCapacityField);
-		typeInput(CylinderCapacityField, CylinderCapacity);
+	public void MakeOptSelect() {
+		clickOnElement(makeField);
+		clickOnElement(makeOpt.get(2));
 	}
 	
-	public void EnginePerformanceField(String EnginePerformance ) {
-		clickOnElement(EnginePerformanceField);
-		typeInput(EnginePerformanceField, EnginePerformance);
+	public void EnginePerformanceField(String EnginePerformance) {
+		clickOnElement(enginePerformanceField);
+		typeInput(enginePerformanceField, EnginePerformance);
 	}
 	
-	public void DateOfManufactureField() {
-		clickOnElement(DateOfManufactureIcon);
-		clickOnElement(DatePicker);
-		
+	public void DateOfManufacture() {
+		clickOnElement(dateOfManuFacture);
+		clickOnElement(dateselect);
 	}
 	
-	public void NumOfSeat() {
-		clickOnElement(NumOfSeat);
-		clickOnElement(NumOfSeatOpt.get(2));
+	public void NumOfSeatSelect() {
+		clickOnElement(numOfSeats);
+		clickOnElement(numOfSeatsOpt.get(2));
 	}
 	
-	public void NumOfSeatsMotorCyclel() {
-		clickOnElement(NumOfSeatsMotorCycle1);
-		clickOnElement(NumOfSeatsMotorCycleOpt.get(2));
+	public void FuelSelect() {
+		clickOnElement(fuelField);
+		clickOnElement(fuelOpt.get(2));
 	}
 	
-	public void FuelFiled() {
-		clickOnElement(FuelFiled);
-		clickOnElement(FuelFiledOpt.get(1));
+	public void ListPrice(String ListPrice) {
+		clickOnElement(listPrice);
+		typeInput(listPrice, ListPrice);
 	}
 	
-	public void PayloadField(String Payload ) {
-		clickOnElement(PayloadField);
-		typeInput(PayloadField, Payload);
+	public void AnnualMileage(String AnnualMileage) {
+		clickOnElement(annualMileage);
+		typeInput(annualMileage, AnnualMileage);
 	}
 	
-	public void TotalWeightField(String TotalWeight ) {
-		clickOnElement(TotalWeightField);
-		typeInput(TotalWeightField, TotalWeight);
+	public void VehicleDataPage_NextBtn() {
+		clickOnElement(nextBtn);
 	}
 	
-	public void ListpriceFiled(String Listprice ) {
-		clickOnElement(ListpriceFiled);
-		typeInput(ListpriceFiled, Listprice);
-	}
-	
-	public void AnnualMileageFiled(String AnnualMileage ) {
-		clickOnElement(AnnualMileageFiled);
-		typeInput(AnnualMileageFiled, AnnualMileage);
-	}
-	
-	public void NextButton(){
-		clickOnElement(NextButton);
-		
-	}
-
 }

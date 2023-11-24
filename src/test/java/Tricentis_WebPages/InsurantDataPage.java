@@ -10,162 +10,159 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.SeleniumUtility;
 
 public class InsurantDataPage extends SeleniumUtility{
-	
-	public  InsurantDataPage(WebDriver driver) {
+	public InsurantDataPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(id="firstname")
-	private WebElement FirstNameInputFiled;
 	
-	@FindBy(id="lastname")
-	private WebElement LastNameInputFiled;
+	@FindBy(xpath="//input[@id=\"firstname\"]")
+	private WebElement firstNameInputField;
 	
-	@FindBy(id="birthdate")
-	private WebElement BirthdateField;
+	@FindBy(xpath="//input[@id=\"lastname\"]")
+	private WebElement lastNameInputField;
 	
-	@FindBy(xpath="//div[p[label[input[@id=\\\"gendermale\\\"]]]]")
-	private WebElement GenderSelect;
+	@FindBy(xpath="//input[@id=\"birthdate\"]")
+	private WebElement birthDate;
 	
-	@FindBy(id="streetaddress")
-	private WebElement StreetAddressField;
+	@FindBy(xpath="//input[@id=\"gendermale\"]")
+	private WebElement genderSelect;
 	
-	@FindBy(id="country")
-	private WebElement countryField;
+	@FindBy(xpath="//input[@id=\"streetaddress\"]")
+	private WebElement streetAddress;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[2]/div[6]/select/option")
+	@FindBy(xpath="//select[@id=\"country\"]")
+	private WebElement country;
+	
+	@FindBy(xpath="//select[@id=\"country\"]/option")
 	private List<WebElement> countryOpt;
 	
-	@FindBy(id="zipcode")
-	private WebElement ZipcodeField;
+	@FindBy(xpath="//input[@id=\"zipcode\"]")
+	private WebElement zipCode;
 	
-	@FindBy(id="city")
-	private WebElement CityField;
+	@FindBy(xpath="//input[@id=\"city\"]")
+	private WebElement cityField;
 	
-	@FindBy(id="occupation")
-	private WebElement OccupationField;
+	@FindBy(xpath="//select[@id=\"occupation\"]")
+	private WebElement occupation;
 	
-	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[2]/div[9]/select/option")
-	private List<WebElement> OccupationOpt ;
+	@FindBy(xpath="//select[@id=\"occupation\"]/option")
+	private List<WebElement> occupationOpt;
 	
-	@FindBy(xpath="//div[p[label[input[@id=\"speeding\"]]]]")
-	private WebElement Hobbies;
+	@FindBy(xpath="//div[@class=\"idealsteps-wrap\"]/section[2]/div[10]/p/label")
+	private List<WebElement> hobbiesOpt;
 	
-	@FindBy(id="nextenterproductdata")
-	private WebElement NextButton;
-	
-//_______________________________________________________________________________________________
-//_______________________________________________________________________________________________
-	
-	public WebElement getFirstNameInputFiled() {
-		return FirstNameInputFiled;
+	@FindBy(xpath="//button[@id=\"nextenterproductdata\"]")
+	private WebElement nextBtn;
+
+	public WebElement getFirstNameInputField() {
+		return firstNameInputField;
 	}
 
-	public WebElement getLastNameInputFiled() {
-		return LastNameInputFiled;
+	public WebElement getLastNameInputField() {
+		return lastNameInputField;
 	}
 
-	public WebElement getBirthdateField() {
-		return BirthdateField;
+	public WebElement getBirthDate() {
+		return birthDate;
 	}
-	
+
 	public WebElement getGenderSelect() {
-		return GenderSelect;
-	}
-	
-	public WebElement getStreetAddressField() {
-		return StreetAddressField;
+		return genderSelect;
 	}
 
-	public WebElement getCountryField() {
-		return countryField;
+	public WebElement getStreetAddress() {
+		return streetAddress;
+	}
+
+	public WebElement getCountry() {
+		return country;
 	}
 
 	public List<WebElement> getCountryOpt() {
 		return countryOpt;
 	}
 
-	public WebElement getZipcodeField() {
-		return ZipcodeField;
+	public WebElement getZipCode() {
+		return zipCode;
 	}
 
 	public WebElement getCityField() {
-		return CityField;
+		return cityField;
 	}
 
-	public WebElement getOccupationField() {
-		return OccupationField;
+	public WebElement getOccupation() {
+		return occupation;
 	}
 
 	public List<WebElement> getOccupationOpt() {
-		return OccupationOpt;
+		return occupationOpt;
 	}
 
-	public WebElement getHobbies() {
-		return Hobbies;
+	public List<WebElement> getHobbiesOpt() {
+		return hobbiesOpt;
 	}
 
-	public WebElement getNextButton() {
-		return NextButton;
+	public WebElement getNextBtn() {
+		return nextBtn;
 	}
 	
-//______________________________________________________________________
-//______________________________________________________________________
+//**********************************************************************************
 	
-	public void FirstNameInputFiled(String FirstName) {
-		clickOnElement(FirstNameInputFiled);
-		typeInput(FirstNameInputFiled, FirstName);
+	public void FirstName(String FirstName) {
+		clickOnElement(firstNameInputField);
+		typeInput(firstNameInputField, FirstName);
 	}
 	
-	public void LastNameInputFiled(String LastName) {
-	    clickOnElement(LastNameInputFiled);
-		typeInput(LastNameInputFiled, LastName);
+	public void LastName(String LastName) {
+		clickOnElement(lastNameInputField);
+		typeInput(lastNameInputField, LastName);
 	}
 	
-	public void BirthdateField(String Birthdate) {
-		clickOnElement(BirthdateField);
-		typeInput(BirthdateField, Birthdate);
+	public void DOB(String DateOfBirth) {
+		clickOnElement(birthDate);
+		typeInput(birthDate, DateOfBirth);
 	}
 	
-	public void GenderSelect() {
-		clickOnElement(GenderSelect);
+	public void Gender() {
+		clickOnElement(genderSelect);
+	}
+	public void StreetAddress(String StreetAddress) {
+		clickOnElement(streetAddress);
+		typeInput(streetAddress, StreetAddress);
 	}
 	
-	public void StreetAddressField(String StreetAddress) {
-		clickOnElement(StreetAddressField);
-		typeInput(StreetAddressField, StreetAddress);
-	}
-	
-	public void countryField() {
-		clickOnElement(countryField);
-		for(int i = 0; i<countryOpt.size();i++) {
-			if(countryOpt.get(i).getText().contains("India")){
+	public void Country() {
+		clickOnElement(country);
+		for(int i = 0; i<countryOpt.size(); i++) {
+			if(countryOpt.get(i).getText().contains("India")) {
 				clickOnElement(countryOpt.get(i));
 				break;
 			}
 		}
 	}
 	
-	public void ZipcodeField(String Zipcode) {
-		clickOnElement(ZipcodeField);
-		typeInput(ZipcodeField, Zipcode);
+	public void ZipCode(String ZipCode) {
+		clickOnElement(zipCode);
+		typeInput(zipCode, ZipCode);
 	}
 	
-	public void CityField(String City) {
-		clickOnElement(CityField);
+	public void City(String City) {
+		clickOnElement(cityField);
+		typeInput(cityField, City);
 	}
 	
-	public void OccupationField() {
-		clickOnElement(OccupationField);
-		clickOnElement(OccupationOpt.get(1));
+	public void Occupation() {
+		clickOnElement(occupation);
+		clickOnElement(occupationOpt.get(1));
 	}
 	
 	public void Hobbies() {
-		clickOnElement(Hobbies);
+		clickOnElement(hobbiesOpt.get(0));
+		clickOnElement(hobbiesOpt.get(1));
 	}
 	
-	public void NextButton() {
-		clickOnElement(NextButton);
+	public void InsurantDataPage_NextBtn() {
+		clickOnElement(nextBtn);
 	}
-	
+
 }

@@ -12,73 +12,92 @@ public class SendQuotesPage extends SeleniumUtility{
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(id="email")
-	private WebElement EmailField;
+	@FindBy(xpath="//input[@id=\"email\"]")
+	private WebElement eMail;
 	
-	@FindBy(id="phone")
-	private WebElement PhoneField;
+	@FindBy(xpath="//input[@id=\"username\"]")
+	private WebElement username;
 	
-	@FindBy(id="username")
-	private WebElement UsernameField;
+	@FindBy(xpath="//input[@id=\"password\"]")
+	private WebElement password;
 	
-	@FindBy(id="password")
-	private WebElement PasswordField;
+	@FindBy(xpath="//input[@id=\"confirmpassword\"]")
+	private WebElement confirmpassword;
 	
-	@FindBy(id="confirmpassword")
-	private WebElement ConfirmPasswordField;
+	@FindBy(xpath="//div[@class=\"sa-button-container\"]/div/button")
+	private WebElement okBtn;
 	
-	@FindBy(id="sendemail")
-	private WebElement SendeMailButton;
-
-	public WebElement getEmailField() {
-		return EmailField;
+	@FindBy(xpath="//button[@id=\"sendemail\"]")
+	private WebElement sendeMailBtn;
+	
+	public WebElement getSendeMailBtn() {
+		return sendeMailBtn;
 	}
 
-	public WebElement getPhoneField() {
-		return PhoneField;
+	public WebElement getEmailMsg() {
+		return emailMsg;
 	}
 
-	public WebElement getUsernameField() {
-		return UsernameField;
+	public void setEmailMsg(WebElement emailMsg) {
+		this.emailMsg = emailMsg;
 	}
 
-	public WebElement getPasswordField() {
-		return PasswordField;
+	@FindBy(xpath="//div[@class=\"sweet-alert showSweetAlert visible\"]/h2")
+	private WebElement emailMsg;
+	
+
+	public WebElement geteMail() {
+		return eMail;
 	}
 
-	public WebElement getConfirmPasswordField() {
-		return ConfirmPasswordField;
+	public WebElement getUsername() {
+		return username;
 	}
 
-	public WebElement getSendeMailField() {
-		return SendeMailButton;
-	}
-	
-//________________________________________________________________
-//________________________________________________________________
-	
-	public void EmailField(String Email) {
-		typeInput(EmailField, Email);
-	}
-	
-	public void PhoneField(String Phone) {
-		typeInput(PhoneField, Phone);
-	}
-	
-	public void UsernameField(String Username) {
-		typeInput(UsernameField, Username);
-	}
-	
-	public void PasswordField(String Password) {
-		typeInput(PasswordField, Password);
-	}
-	
-	public void ConfirmPasswordField(String ConfirmPassword) {
-		typeInput(ConfirmPasswordField, ConfirmPassword);
-	}
-	
-	public void SendeMailButton() {
-		clickOnElement(SendeMailButton);
+	public WebElement getPassword() {
+		return password;
 	}
 
+	public WebElement getOkBtn() {
+		return okBtn;
+	}
+
+	public WebElement getConfirmpassword() {
+		return confirmpassword;
+	}
+	
+// **************************************************************
+	
+	public void EMail(String EMail) {
+		clickOnElement(eMail);
+		typeInput(eMail, EMail);
+	}
+	
+	public void UserName(String UserName) {
+		clickOnElement(username);
+		typeInput(username, UserName);
+	}
+	
+	public void Password(String Password) {
+		clickOnElement(password);
+		typeInput(password, Password);
+	}
+	
+	public void ConfirmPassword(String ConfirmPassword) {
+		clickOnElement(confirmpassword);
+		typeInput(confirmpassword, ConfirmPassword);
+	}
+	
+	public void SendBtn() {
+		clickOnElement(sendeMailBtn);
+	}
+	
+	public String MailMsg() {
+		return getTextForElement(emailMsg);
+	}
+	
+	public void OkBtn() {
+		clickOnElement(okBtn);
+	}
+	
 }

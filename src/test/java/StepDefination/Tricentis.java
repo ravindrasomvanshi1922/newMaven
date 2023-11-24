@@ -1,6 +1,7 @@
 package StepDefination;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import Tricentis_WebPages.InsurantDataPage;
 import Tricentis_WebPages.PriceOptionPage;
@@ -21,141 +22,180 @@ public class Tricentis extends SeleniumUtility{
 	PriceOptionPage getPriceOptionPage;
 	SendQuotesPage getSendQuotesPage;
 	
+	@Given("User is already in vehicle data page")
+	public void user_is_already_in_vehicle_data_page() {
+	    driver = setUp("Chrome", "https://sampleapp.tricentis.com/101/app.php");
+	    
+		
+		  getVehicleDataPage = new VehicleDataPage(driver);
+		  getInsurantDataPage = new InsurantDataPage(driver);
+		  getProductDataPage = new ProductDataPage(driver);
+		  getPriceOptionPage = new PriceOptionPage(driver); 
+		  getSendQuotesPage = new SendQuotesPage(driver);
+		 
+	    
+	    String ActTitle = getCurrentPageTitle();
+	    String ExpTitle = "Enter Vehicle Data";
+	    Assert.assertEquals(ActTitle, ExpTitle);
+	   
+	}
+
+	@When("user click on AutoMobile link")
+	public void user_click_on_auto_mobile_link() {
+		getVehicleDataPage.ClickAutomobile();
+	}
+
+	@When("user select Make option and enter EnginePerformance [kW]")
+	public void user_select_make_option_and_enter_engine_performance_k_w() {
+	    getVehicleDataPage.MakeOptSelect();
+	    getVehicleDataPage.EnginePerformanceField("515");
+	}
+
+	@When("user select DateOfManufacture and NumberOfSeats")
+	public void user_select_date_of_manufacture_and_number_of_seats() {
+	    getVehicleDataPage.DateOfManufacture();
+	    getVehicleDataPage.NumOfSeatSelect();
+	}
+
+	@When("user select Fuel Type and enter List Price [$]")
+	public void user_select_fuel_type_and_enter_list_price_$() {
+	    getVehicleDataPage.FuelSelect();
+	    getVehicleDataPage.ListPrice("100000");
+	}
+
+	@When("user enter Annual Mileage [mi]")
+	public void user_enter_annual_mileage_mi() {
+	    getVehicleDataPage.AnnualMileage("1000");
+	}
+
+	@When("click on VehicleDataPage Next button")
+	public void click_on_vehicle_data_page_next_button() {
+	    getVehicleDataPage.VehicleDataPage_NextBtn();
+	}
+
+	@Then("Verify user is on InsurantDataPage")
+	public void verify_user_is_on_insurant_data_page() {
+	    String ActTitle = getCurrentPageTitle();
+	    String ExpTitle = "Enter Insurant Data";
+	    Assert.assertEquals(ActTitle, ExpTitle);
+	}
+
+	@When("user enter FirstName and LastName")
+	public void user_enter_first_name_and_last_name() {
+	    getInsurantDataPage.FirstName("Vivek");
+	    getInsurantDataPage.LastName("Patil");
+	}
+
+	@When("select DateofBirth")
+	public void select_dateof_birth() {
+	    getInsurantDataPage.DOB("05/19/2002");
+	}
+
+	@When("enter StreetAddress and select Country")
+	public void enter_street_address_and_select_country() {
+	    getInsurantDataPage.StreetAddress("AT.POST BAMBRUD BK");
+	    getInsurantDataPage.Country();
+	}
+
+	@When("enter Zipcode and City")
+	public void enter_zipcode_and_city() {
+	    getInsurantDataPage.ZipCode("424201");
+	    getInsurantDataPage.City("Jalgaon");
+	}
+
+	@When("select Occupation and Hobbies")
+	public void select_occupation_and_hobbies() {
+	    getInsurantDataPage.Occupation();
+	    getInsurantDataPage.Hobbies();
+	}
+
+	@When("click on InsurantData Next button")
+	public void click_on_insurant_data_next_button() {
+	    getInsurantDataPage.InsurantDataPage_NextBtn();
+	}
 	
-	@Given("user is already loggedIn")
-	public void user_is_already_logged_in() {
-		driver = setUp("Chrome", "https://sampleapp.tricentis.com/101/app.php");
-		
-		getVehicleDataPage = new VehicleDataPage(driver); 
-		getInsurantDataPage = new InsurantDataPage(driver);
-		getProductDataPage = new ProductDataPage(driver);
-		getPriceOptionPage = new PriceOptionPage(driver);
-		getSendQuotesPage = new SendQuotesPage(driver);
+	@Then("Verify user is on ProductDataPage")
+	public void verify_user_is_on_product_data_page() {
+		String ActTitle = getCurrentPageTitle();
+	    String ExpTitle = "Enter Product Data";
+	    Assert.assertEquals(ActTitle, ExpTitle);
 	}
 
-	@When("user select Make and Model Opt")
-	public void user_select_make_and_model_opt() {
-	    getVehicleDataPage.MakeFieldData();
-	    getVehicleDataPage.ModelFieldData();
+	@When("user select StartDate and InsuranceSum [$]")
+	public void user_select_start_date_and_insurance_sum_$() {
+	    getProductDataPage.StartDateSelect("02/22/2024");
+	    getProductDataPage.InsuranceSum();
 	}
 
-	@When("select cylindercapacity {string} and engineperformance {string} and select dateofmanufacture")
-	public void select_cylindercapacity_and_engineperformance(String string, String string2) {
-		getVehicleDataPage.CylinderCapacityField("500");
-		getVehicleDataPage.EnginePerformanceField("60");
-		getVehicleDataPage.DateOfManufactureField();
+	@When("select MeritRating and DamageInsurance")
+	public void select_merit_rating_and_damage_insurance() {
+	    getProductDataPage.MeritRating();
+	    getProductDataPage.DamageInsurance();
 	}
 
-	@When("numberofseats")
-	public void numberofseats() {
-		getVehicleDataPage.NumOfSeatsMotorCyclel();
+	@When("select Optional Products and CourtesyCar")
+	public void select_optional_products_and_courtesy_car() {
+	    getProductDataPage.OptionalProduct();
+	    getProductDataPage.CourtesyCar();
 	}
 
-	@Then("user select fueltype and Payload {string}")
-	public void user_select_fueltype_and_payload(String string) {
-		getVehicleDataPage.FuelFiled();
-		getVehicleDataPage.PayloadField("50");
+	@When("click on ProductData Next button")
+	public void click_on_product_data_next_button() {
+	    getProductDataPage.ProductDataPage_NextBtn();
+	}
+	
+	@Then("Verify user is on PriceOptionPage")
+	public void verify_user_is_on_price_option_page() {
+		String ActTitle = getCurrentPageTitle();
+	    String ExpTitle = "Select Price Option";
+	    Assert.assertEquals(ActTitle, ExpTitle);
 	}
 
-	@Then("select totalweight {string} and listprice {string}")
-	public void select_totalweight_and_listprice(String string, String string2) {
-		getVehicleDataPage.TotalWeightField("100");
-		getVehicleDataPage.ListpriceFiled("100000");
+	@When("user select required option")
+	public void user_select_required_option() {
+	    getPriceOptionPage.PriceOptionSelect();
 	}
 
-	@Then("select annualmileage {string} and click on the NextButton")
-	public void select_annualmileage_and_click_on_the_next_button(String string) {
-		getVehicleDataPage.AnnualMileageFiled("2000");
-		getVehicleDataPage.NextButton();
-		
+	@When("click on PriceOption Next button")
+	public void click_on_price_option_next_button() {
+	    getPriceOptionPage.PriceOptionPage_NextBtn();
+	}
+	
+	@Then("Verify user is on SendQuotesPage")
+	public void verify_user_is_on_send_quotes_page() {
+		String ActTitle = getCurrentPageTitle();
+	    String ExpTitle = "Send Quote";
+	    Assert.assertEquals(ActTitle, ExpTitle);
 	}
 
-	@When("user fill FirstName {string} and LastName {string}")
-	public void user_fill_first_name_and_last_name(String string, String string2) {
-	   getInsurantDataPage.FirstNameInputFiled("Ravindra");
-	   getInsurantDataPage.LastNameInputFiled("Somvanshi");
+	@When("user enter Email and UserName")
+	public void user_enter_email_and_user_name() {
+	   getSendQuotesPage.EMail("abc@gmail.com");
+	   getSendQuotesPage.UserName("ravindra");
 	}
 
-	@When("select Date Of Birth {string} and Gender")
-	public void select_date_of_birth_and_gender(String string) {
-		getInsurantDataPage.BirthdateField("05/19/2002");
-		getInsurantDataPage.GenderSelect();
+	@When("enter Password and ConfirmPassword")
+	public void enter_password_and_confirm_password() {
+	    getSendQuotesPage.Password("Ravi@22");
+	    getSendQuotesPage.ConfirmPassword("Ravi@22");
 	}
 
-	@When("select Street address {string}")
-	public void select_street_address(String string) {
-		getInsurantDataPage.StreetAddressField("AT.POST BAMBRUD BK");
-	}
-
-	@Then("user select country and zipcode {string}")
-	public void user_select_country_and_zipcode(String string, String string2) {
-		getInsurantDataPage.countryField();
-		getInsurantDataPage.ZipcodeField("424242");
-	}
-
-	@Then("city {string} and occupation")
-	public void city_and_occupation(String string) {
-		getInsurantDataPage.CityField("Jalgaon");
-		getInsurantDataPage.OccupationField();
-	}
-
-	@Then("hobbies and click on the NextButton")
-	public void hobbies_and_click_on_the_next_button() {
-		getInsurantDataPage.Hobbies();
-		getInsurantDataPage.NextButton();
-	}
-
-	@When("user select StartDate {string}")
-	public void user_select_start_date(String string) {
-	    getProductDataPage.StartDateField("01/08/2024");
-	}
-
-	@When("select Insurance Sum [$] and Merit Rating")
-	public void select_insurance_sum_$_and_merit_rating() {
-		getProductDataPage.InsuranceSumField();
-		getProductDataPage.MeritratingField();
-	}
-
-	@Then("user select Damage Insurance and Optional Products")
-	public void user_select_damage_insurance_and_optional_products() {
-		getProductDataPage.DamageInsuranceField();
-		getProductDataPage.OptionalProduct();
-	}
-
-	@Then("select Courtesy Car and NextButton")
-	public void select_courtesy_car_and_next_button() {
-		getProductDataPage.CourtesyCarFied();
-		getProductDataPage.NextButton();
-	}
-
-	@When("user select Price option")
-	public void user_select_price_option() {
-	    getPriceOptionPage.PriceOption();
-	}
-
-	@Then("select NextButton")
-	public void select_next_button() {
-		getPriceOptionPage.NextButton();
-	}
-
-	@When("user fill Email {string}")
-	public void user_fill_email(String string) {
-	    getSendQuotesPage.EmailField("abc@gmail.com");
-	}
-
-	@When("fill Username {string} and Password {string}")
-	public void fill_username_and_password(String string, String string2) {
-		getSendQuotesPage.UsernameField("ravindra");
-		getSendQuotesPage.PasswordField("Ravi@22");
-	}
-
-	@Then("user fill Confirm Password {string}")
-	public void user_fill_confirm_password(String string) {
-		getSendQuotesPage.ConfirmPasswordField("Ravi@22");
-	}
-
-	@Then("click on the SendButton")
+	@When("click on the Send button")
 	public void click_on_the_send_button() {
-		getSendQuotesPage.SendeMailButton();
+	    getSendQuotesPage.SendBtn();
 	}
+
+	@Then("verify Email is Send or not")
+	public void verify_email_is_send_or_not() {
+	    String ActMsg = getSendQuotesPage.MailMsg();
+	    String ExpMsg = "Sending e-mail success!";
+	    Assert.assertEquals(ActMsg, ExpMsg);
+	}
+
+	@Then("click on ok button")
+	public void click_on_ok_button() {
+	    getSendQuotesPage.OkBtn();
+	}
+	
+		
 }
